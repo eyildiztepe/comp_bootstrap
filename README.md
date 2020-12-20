@@ -1,1 +1,1 @@
-# Comparison of Bootstrap Approach
+# Comparison of Bootstrap Approaches
