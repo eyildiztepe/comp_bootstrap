@@ -1,7 +1,9 @@
 # BCa bootstrap CI
 boot.BCa <-function(data, statistic, statistic.vector, fun, conf = .95) { 
-  data <- as.matrix(data);  n <- nrow(data)
-  N <- 1:n;  alpha <- (1 + c(-conf, conf))/2
+  data <- as.matrix(data)
+  n <- nrow(data)
+  N <- 1:n
+  alpha <- (1 + c(-conf, conf))/2
   zalpha <- qnorm(alpha)
   z0<-qnorm(sum(statistic.vector<statistic)/ length(statistic.vector))
   statistic.vector.jack <- numeric(n)
