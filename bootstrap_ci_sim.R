@@ -1,15 +1,20 @@
 #R codes used in the simulation study are provided for #only 20% trimmed mean.
 #Distribution: N(0,1), estimator: 20% trimmed mean
 #initial values
-alpha<-0.05; B<-1500 #bootstrap replications
+alpha<-0.05
+B<-1500 #bootstrap replications
 k<-5000 #iteration number
 n<-20 #sample size
 tr=0.2 #trim value
 theta<-0 # parameter value
 
 #simulation
-con.theta <- numeric(B) ; suf.theta <- numeric(B) ; bal.theta <- numeric(B)
-con.theta.se<-numeric(B) ; suf.theta.se<-numeric(B) ; bal.theta.se<-numeric(B)
+con.theta <- numeric(B) 
+suf.theta <- numeric(B) 
+bal.theta <- numeric(B)
+con.theta.se<-numeric(B) 
+suf.theta.se<-numeric(B) 
+bal.theta.se<-numeric(B)
 con.bs.bca<-matrix(nrow=k,ncol=2) 
 suf.bs.bca<-matrix(nrow=k,ncol=2)
 bal.bs.bca<-matrix(nrow=k,ncol=2)
@@ -19,18 +24,20 @@ bal.bs.t<-matrix(nrow=k,ncol=2)
 con.bs.perc<-matrix(nrow=k,ncol=2)
 suf.bs.perc<-matrix(nrow=k,ncol=2)
 bal.bs.perc<-matrix(nrow=k,ncol=2)
-clist<-list() ; set.seed(100)
+clist<-list() 
+set.seed(100)
 for (i in 1:k) { x<-rnorm(n)
   theta.hat <- mean(x,trim=tr)
-#Randomly permute the indices for balanced bootstrap
+  #Randomly permute the indices for balanced bootstrap
   bal.ind<-sample(rep(1:n,B),B*n)
   for (b in 1:B) { 
     ind.con <- sample(1:n, size = n, replace = TRUE)
     resample.x <- x[ind.con]
     con.theta[b] <- mean(resample.x,trim=tr)
     con.theta.se[b]<-bootse(resample.x,nboot=500, est=mean,SEED=F, trim=tr) 
-#bootse computes bootstrap estimate of the standard #error of the estimator est
-    ind.suf <- unique(ind.con)#sufficient bootstrapping
+    #bootse computes bootstrap estimate of the standard error of the estimator est
+    #sufficient bootstrapping
+    ind.suf <- unique(ind.con) 
     resample.x <- x[ind.suf]
     suf.theta[b] <- mean(resample.x, trim=tr)
     suf.theta.se[b]<-bootse(resample.x,nboot=500, est=mean,SEED=F, trim=tr) 
