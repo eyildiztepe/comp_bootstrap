@@ -1,1 +1,1 @@
-# comp_bootstrap
+# Comparison of Bootstrap Approach
